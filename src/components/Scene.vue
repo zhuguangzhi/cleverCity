@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import * as THREE from 'three'
 import gsap from "gsap";
 import {onMounted, ref} from "vue";
 //three start
@@ -10,6 +9,8 @@ import {acesHelper} from "../three/acesHelper";
 import {init} from "../three/init";
 import {animate} from "../three/animate";
 import {renderer} from "../three/renderer";
+//创建物体函数
+import {createMesh} from "../three/createMesh";
 //three end
 
 const scene = ref<HTMLElement | null>(null)
@@ -17,15 +18,11 @@ const scene = ref<HTMLElement | null>(null)
 sceneInit.add(camera)
 sceneInit.add(acesHelper)
 
-const plane = new THREE.Mesh(
-    new THREE.PlaneGeometry(20,20),
-    new THREE.MeshStandardMaterial({color:0xffffff})
-)
-sceneInit.add(plane)
 
 onMounted(()=>{
   init()
   animate()
+  createMesh()
   scene.value?.appendChild(renderer.domElement)
 })
 
